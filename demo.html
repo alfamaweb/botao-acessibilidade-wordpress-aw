@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demonstração · Botão de Acessibilidade</title>
+  <style>
+    body { margin: 0; font-family: Georgia, serif; color: #222; background: #fafafa; line-height: 1.6; }
+    header { background: #1b2a4a; color: #fff; padding: 32px 20px; }
+    main { max-width: 720px; margin: 0 auto; padding: 24px 20px 80px; }
+    a { color: #1449c7; }
+    img { max-width: 100%; border-radius: 12px; }
+    .cartao { background: #fff; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 10px rgb(0 0 0 / .08); margin: 20px 0; animation: subir 1s ease both; }
+    @keyframes subir { from { opacity: 0; transform: translateY(20px); } }
+  </style>
+</head>
+<body>
+  <header><h1>Página de demonstração</h1><p>Clique no botão azul da lateral para testar as opções.</p></header>
+  <main>
+    <p>Este é um texto de exemplo para testar o tamanho da letra, o contraste, o espaçamento e a leitura em voz alta. <a href="#">Este é um link de exemplo.</a></p>
+    <div class="cartao"><h2>Um cartão animado</h2><p>Com a opção "Parar animações" ligada, ele aparece sem movimento.</p></div>
+    <p>Selecione um trecho e use "Ouvir" para ouvir só ele. Sem seleção, a página inteira é lida.</p>
+    <form class="cartao" method="get">
+      <h2>Testar as configurações do botão</h2>
+      <p>É o mesmo que dá para mudar no painel do WordPress. Escolha e clique em Aplicar.</p>
+      <p>
+        <label>Cor <input type="color" name="cor" value="#1449c7" /></label>
+        <label>Lado <select name="lado"><option value="direita">Direita</option><option value="esquerda">Esquerda</option></select></label>
+        <label>Altura <select name="altura"><option value="topo">Em cima</option><option value="meio" selected>No meio</option><option value="baixo">Embaixo</option></select></label>
+        <label>Tamanho <select name="tamanho"><option value="pequeno">Pequeno</option><option value="medio" selected>Médio</option><option value="grande">Grande</option></select></label>
+        <label>Libras <select name="libras"><option value="sim">Sim</option><option value="nao">Não</option></select></label>
+      </p>
+      <button type="submit">Aplicar</button>
+    </form>
+  </main>
+  <script>
+    // Monta o botão com o que estiver no endereço (?cor=...&altura=...), igual o plugin faz com o painel.
+    (function () {
+      var q = new URLSearchParams(location.search);
+      var form = document.querySelector('form');
+      var s = document.createElement('script');
+      s.src = 'acessibilidade.js';
+      ['cor', 'lado', 'altura', 'tamanho', 'libras'].forEach(function (k) {
+        if (q.has(k)) { s.dataset[k] = q.get(k); form.elements[k].value = q.get(k); }
+      });
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
