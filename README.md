@@ -1,6 +1,6 @@
 # Botão de Acessibilidade — WordPress AW
 
-Plugin com painel de acessibilidade para visitantes do site. **Versão 1.0.1**, com a correção do bloqueio de cliques ao ativar o guia de leitura.
+Plugin com painel de acessibilidade para visitantes do site. **Versão 1.0.1**.
 
 ## Baixar e instalar
 
@@ -31,12 +31,6 @@ Se o site ainda apresentar a versão anterior, limpe o cache do site/CDN e recar
 - Restauração das preferências padrão.
 
 As preferências do visitante ficam no `localStorage` do navegador. A leitura em voz alta depende dos recursos e vozes disponíveis no navegador; o VLibras depende de conexão com seu serviço externo.
-
-## Correção do guia de leitura
-
-Na versão anterior, a classe `ba11y-guia` era usada tanto no elemento `<html>` quanto na faixa visual. Ao ativar a opção, as regras da faixa — incluindo `pointer-events: none` — também atingiam a página inteira e bloqueavam os cliques.
-
-A faixa agora usa `ba11y-guia-faixa`; `ba11y-guia` permanece somente como estado da preferência no `<html>`. A alteração mantém compatibilidade com preferências já salvas.
 
 ## Testar
 
@@ -103,6 +97,6 @@ Antes de publicar uma atualização, ajuste a versão no cabeçalho do JavaScrip
 
 O aumento do texto depende das unidades usadas pelo tema: fontes em `rem` e `em` acompanham o tamanho raiz; fontes fixadas em `px` podem não aumentar. Sites com CSP precisam permitir os recursos externos usados pelo VLibras. O plugin oferece ferramentas de apoio, mas a acessibilidade também depende do conteúdo e da estrutura do site.
 
-## Origem e licença
+##  licença
 
-Baseado no projeto [telessthalita/botao-acessibilidade](https://github.com/telessthalita/botao-acessibilidade), de Thalita Teles. Licença [MIT](LICENSE), preservada também dentro do ZIP do plugin.
+Licença [MIT](LICENSE), preservada também dentro do ZIP do plugin.
