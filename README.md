@@ -1,6 +1,6 @@
 # Botão de Acessibilidade — WordPress AW
 
-Plugin com painel de acessibilidade para visitantes do site. **Versão 1.0.1**.
+Plugin com painel de acessibilidade para visitantes do site. **Versão 1.1.0**.
 
 ## Baixar e instalar
 
@@ -15,14 +15,14 @@ O botão **Code → Download ZIP** do GitHub baixa o projeto completo. Para inst
 
 ### Atualizar uma instalação existente
 
-Envie o novo ZIP pela mesma tela e escolha **Substituir o atual pelo enviado**. A pasta e o identificador do plugin continuam sendo `botao-acessibilidade`, preservando as configurações salvas. A versão do JavaScript foi atualizada para 1.0.1 para renovar sua URL de cache.
+Envie o novo ZIP pela mesma tela e escolha **Substituir o atual pelo enviado**. A pasta e o identificador do plugin continuam sendo `botao-acessibilidade`, preservando as configurações salvas. A versão do JavaScript foi atualizada para 1.1.0 para renovar sua URL de cache.
 
 Se o site ainda apresentar a versão anterior, limpe o cache do site/CDN e recarregue a página com **Ctrl + Shift + R**.
 
 ## Recursos
 
 - Tamanho do texto em cinco níveis: 90%, 100%, 115%, 130% e 150%.
-- Leitura em voz alta da página ou de um trecho selecionado, com pausa e parada.
+- Leitura em voz alta da página ou de um trecho selecionado, com um botão para ouvir, pausar e continuar e botões − e + para a velocidade (0,5x a 2x). "Restaurar o padrão" também para a leitura.
 - Alto contraste, tons de cinza e destaque de links.
 - Fonte mais legível e maior espaço entre linhas.
 - Pausa das animações e cursor grande.

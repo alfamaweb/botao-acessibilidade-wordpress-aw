@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Botão de Acessibilidade
  * Description:       Botão lateral com tamanho do texto, leitura em voz alta, alto contraste, tons de cinza, links destacados, fonte legível, espaçamento, parar animações, cursor grande, guia de leitura e Libras (VLibras).
- * Version:           1.0.1
+ * Version:           1.1.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            Thalita Teles
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // acesso direto ao arquivo: não faz nada
 }
 
-const BA11Y_VERSAO = '1.0.1';
+const BA11Y_VERSAO = '1.1.0';
 const BA11Y_OPCAO  = 'botao_acessibilidade';
 
 /** Configurações salvas, com valores padrão. */
