@@ -6,43 +6,98 @@
   <title>Demonstração · Botão de Acessibilidade</title>
   <style>
     body { margin: 0; font-family: Georgia, serif; color: #222; background: #fafafa; line-height: 1.6; }
-    header { background: #1b2a4a; color: #fff; padding: 32px 20px; }
-    main { max-width: 720px; margin: 0 auto; padding: 24px 20px 80px; }
+    header { background: #1b2a4a; color: #fff; padding: 24px 20px; }
+    header a { color: #fff; }
+    header nav { display: flex; gap: 16px; justify-content: flex-end; font-size: 15px; }
+    main { max-width: 720px; margin: 0 auto; padding: 24px 20px 120px; }
     a { color: #1449c7; }
-    img { max-width: 100%; border-radius: 12px; }
+    .px { font-size: 15px; line-height: 22px; } /* fonte fixa em px: o painel também aumenta */
     .cartao { background: #fff; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 10px rgb(0 0 0 / .08); margin: 20px 0; animation: subir 1s ease both; }
     @keyframes subir { from { opacity: 0; transform: translateY(20px); } }
+    fieldset { border: 1px solid #ccd; border-radius: 8px; margin: 0 0 12px; }
+    fieldset label { display: inline-block; margin: 2px 12px 2px 0; }
   </style>
 </head>
 <body>
-  <header><h1>Página de demonstração</h1><p>Clique no botão azul da lateral para testar as opções.</p></header>
+  <header>
+    <nav aria-label="Menu de exemplo"><a href="#">Início</a><a href="#" data-sgw-a11y-abrir>Acessibilidade</a></nav>
+    <h1>Página de demonstração</h1>
+    <p>Abra o painel pelo botão do canto, pelo item "Acessibilidade" do menu ou com Alt+Shift+A.</p>
+  </header>
   <main>
     <p>Este é um texto de exemplo para testar o tamanho da letra, o contraste, o espaçamento e a leitura em voz alta. <a href="#">Este é um link de exemplo.</a></p>
-    <div class="cartao"><h2>Um cartão animado</h2><p>Com a opção "Parar animações" ligada, ele aparece sem movimento.</p></div>
+    <p class="px">Este parágrafo usa fonte fixa em px (15px). Com "Aumentar fonte", ele também cresce.</p>
+    <div class="cartao"><h2>Um cartão animado</h2><p>Com a opção "Pausar animações" ligada, ele aparece sem movimento.</p></div>
     <p>Selecione um trecho e use "Ouvir" para ouvir só ele. Sem seleção, a página inteira é lida.</p>
     <form class="cartao" method="get">
       <h2>Testar as configurações do botão</h2>
-      <p>É o mesmo que dá para mudar no painel do WordPress. Escolha e clique em Aplicar.</p>
-      <p>
+      <p>São os mesmos atributos <code>data-*</code> que o plugin escreve a partir do painel do WordPress. Escolha e clique em Aplicar.</p>
+      <fieldset>
+        <legend>Aparência</legend>
         <label>Cor <input type="color" name="cor" value="#1449c7" /></label>
-        <label>Lado <select name="lado"><option value="direita">Direita</option><option value="esquerda">Esquerda</option></select></label>
-        <label>Altura <select name="altura"><option value="topo">Em cima</option><option value="meio" selected>No meio</option><option value="baixo">Embaixo</option></select></label>
-        <label>Tamanho <select name="tamanho"><option value="pequeno">Pequeno</option><option value="medio" selected>Médio</option><option value="grande">Grande</option></select></label>
-        <label>Libras <select name="libras"><option value="sim">Sim</option><option value="nao">Não</option></select></label>
-      </p>
+        <label>Posição <select name="posicao">
+          <option value="inferior-direita">Inferior direita</option>
+          <option value="inferior-esquerda">Inferior esquerda</option>
+          <option value="superior-direita">Superior direita</option>
+          <option value="superior-esquerda">Superior esquerda</option>
+        </select></label>
+        <label>Distância do canto <input type="number" name="deslocamento" value="16" min="0" max="200" /> px</label>
+        <label>Tamanho <input type="number" name="tamanho" value="52" min="44" max="96" /> px</label>
+        <label>Botão flutuante <select name="botao-flutuante"><option value="sim">Sim</option><option value="false">Não</option></select></label>
+        <label>Atalho Alt+Shift+A <select name="atalho"><option value="sim">Sim</option><option value="false">Não</option></select></label>
+      </fieldset>
+      <fieldset>
+        <legend>Recursos</legend>
+        <label><input type="checkbox" name="r" value="fonte" checked /> Tamanho do texto</label>
+        <label><input type="checkbox" name="r" value="contraste" checked /> Contraste</label>
+        <label><input type="checkbox" name="r" value="cinza" checked /> Cinza</label>
+        <label><input type="checkbox" name="r" value="links" checked /> Links</label>
+        <label><input type="checkbox" name="r" value="legivel" checked /> Fonte legível</label>
+        <label><input type="checkbox" name="r" value="espaco" checked /> Espaçamento</label>
+        <label><input type="checkbox" name="r" value="animacoes" checked /> Animações</label>
+        <label><input type="checkbox" name="r" value="cursor" checked /> Cursor</label>
+        <label><input type="checkbox" name="r" value="guia" checked /> Guia</label>
+        <label><input type="checkbox" name="r" value="ouvir" checked /> Ouvir</label>
+        <label><input type="checkbox" name="r" value="libras" checked /> Libras</label>
+        <label><input type="checkbox" name="r" value="mascara" checked /> Máscara</label>
+        <label><input type="checkbox" name="r" value="foco" checked /> Foco reforçado</label>
+        <label><input type="checkbox" name="r" value="estrutura" checked /> Estrutura</label>
+        <label><input type="checkbox" name="r" value="perfis" checked /> Perfis</label>
+      </fieldset>
+      <p><label>Título do painel <input type="text" name="titulo" placeholder="Recursos de acessibilidade" maxlength="200" /></label></p>
+      <p id="aviso-recursos" role="alert" hidden><strong>Marque pelo menos um recurso.</strong> Sem nenhum, o painel usa a lista padrão (todos menos Ouvir e Libras), e não o que está na tela.</p>
       <button type="submit">Aplicar</button>
     </form>
   </main>
   <script>
-    // Monta o botão com o que estiver no endereço (?cor=...&altura=...), igual o plugin faz com o painel.
+    // Monta o <script> do painel com o que estiver no endereço (?posicao=...&r=fonte&r=ouvir...), como o plugin faz com o painel.
     (function () {
       var q = new URLSearchParams(location.search);
       var form = document.querySelector('form');
       var s = document.createElement('script');
       s.src = 'acessibilidade.js';
-      ['cor', 'lado', 'altura', 'tamanho', 'libras'].forEach(function (k) {
-        if (q.has(k)) { s.dataset[k] = q.get(k); form.elements[k].value = q.get(k); }
+      s.setAttribute('data-cor', '#1449c7');
+      s.setAttribute('data-posicao', 'inferior-direita');
+      s.setAttribute('data-tamanho', '52');
+      ['cor', 'posicao', 'deslocamento', 'tamanho', 'botao-flutuante', 'atalho'].forEach(function (k) {
+        if (q.has(k)) { s.setAttribute('data-' + k, q.get(k)); form.elements[k].value = q.get(k); }
       });
+      var caixas = form.querySelectorAll('input[name=r]'), r;
+      var aviso = document.getElementById('aviso-recursos');
+      function algumMarcado() { return Array.prototype.some.call(caixas, function (c) { return c.checked; }); }
+      // Nenhum recurso marcado não vira data-recursos="" em silêncio: avisa e não envia.
+      form.addEventListener('submit', function (e) {
+        if (!algumMarcado()) { e.preventDefault(); aviso.hidden = false; caixas[0].focus(); }
+      });
+      form.addEventListener('change', function () { if (algumMarcado()) { aviso.hidden = true; } });
+      if (q.toString()) { // o formulário já foi enviado: vale o que estava marcado
+        r = q.getAll('r');
+        Array.prototype.forEach.call(caixas, function (c) { c.checked = r.indexOf(c.value) >= 0; });
+      } else {
+        r = Array.prototype.map.call(caixas, function (c) { return c.value; });
+      }
+      if (r.length) { s.setAttribute('data-recursos', r.join(',')); } else { aviso.hidden = false; } // endereço sem r= : padrão do painel, com aviso
+      if (q.get('titulo')) { s.setAttribute('data-rotulos', JSON.stringify({ titulo: q.get('titulo') })); form.elements.titulo.value = q.get('titulo'); }
       document.body.appendChild(s);
     })();
   </script>

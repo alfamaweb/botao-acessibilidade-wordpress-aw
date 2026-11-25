@@ -1,0 +1,4 @@
+# O acessibilidade.js e gerado pelo kit do SGW e precisa ficar byte a byte igual ao gerado:
+# sem conversao de fim de linha (core.autocrlf) na raiz nem na copia do plugin.
+acessibilidade.js -text
+*.zip binary
