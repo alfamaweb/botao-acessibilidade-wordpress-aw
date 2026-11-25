@@ -3,7 +3,7 @@
  * Plugin Name:       Botão de Acessibilidade
  * Plugin URI:        https://github.com/alfamaweb/botao-acessibilidade-wordpress-aw
  * Description:       Painel de acessibilidade para visitantes: tamanho do texto, contraste claro e escuro, tons de cinza, links destacados, fonte legível, espaçamento, pausar animações, cursor grande, guia e máscara de leitura, foco reforçado, estrutura da página, perfis prontos, leitura em voz alta e Libras (VLibras).
- * Version:           2.0.0
+ * Version:           2.0.1
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            Alfama Web
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // acesso direto ao arquivo: não faz nada
 }
 
-const BA11Y_VERSAO = '2.0.0';
+const BA11Y_VERSAO = '2.0.1';
 const BA11Y_OPCAO  = 'botao_acessibilidade';
 const BA11Y_HANDLE = 'botao-acessibilidade';
 const BA11Y_META   = '_ba11y_esconder';
@@ -384,6 +384,55 @@ add_action(
 		}
 		// WP 6.3+ entende o array (rodapé + defer); antes dele, o array conta como "no rodapé".
 		wp_enqueue_script( BA11Y_HANDLE, plugins_url( 'acessibilidade.js', __FILE__ ), array(), BA11Y_VERSAO, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+	}
+);
+
+function ba11y_css_mobile() {
+	return <<<'CSS'
+@media (max-width: 480px) {
+	.sgw-a11y .sgw-a11y-painel {
+		top: max(8px, env(safe-area-inset-top, 0px));
+		bottom: max(8px, env(safe-area-inset-bottom, 0px));
+		left: max(8px, env(safe-area-inset-left, 0px));
+		right: max(8px, env(safe-area-inset-right, 0px));
+		width: auto;
+		max-width: none;
+		max-height: none;
+		overscroll-behavior: contain;
+		-webkit-overflow-scrolling: touch;
+	}
+}
+@media (max-height: 500px) {
+	.sgw-a11y .sgw-a11y-painel {
+		top: max(8px, env(safe-area-inset-top, 0px));
+		bottom: max(8px, env(safe-area-inset-bottom, 0px));
+		width: min(640px, calc(100vw - 16px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)));
+		max-width: none;
+		max-height: none;
+		padding: 12px;
+		overscroll-behavior: contain;
+		-webkit-overflow-scrolling: touch;
+	}
+	.sgw-a11y .sgw-a11y-grade,
+	.sgw-a11y .sgw-a11y-perfis-lista {
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	}
+	.sgw-a11y .sgw-a11y-cab {
+		margin-bottom: 8px;
+	}
+}
+CSS;
+}
+
+add_action(
+	'wp_head',
+	function () {
+		if ( ba11y_escondido_aqui() ) {
+			return;
+		}
+		$nonce = apply_filters( 'botao_acessibilidade_nonce', '' );
+		$attr  = ( is_string( $nonce ) && '' !== $nonce ) ? ' nonce="' . esc_attr( $nonce ) . '"' : '';
+		echo '<style id="botao-acessibilidade-mobile"' . $attr . '>' . ba11y_css_mobile() . '</style>' . "\n";
 	}
 );
 
