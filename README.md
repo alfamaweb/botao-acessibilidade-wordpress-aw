@@ -1,6 +1,6 @@
 # Botão de Acessibilidade — WordPress AW
 
-Plugin com painel de acessibilidade para visitantes do site. **Versão 2.0.1**, da Alfama Web.
+Plugin com painel de acessibilidade para visitantes do site. **Versão 2.0.2**, da Alfama Web.
 
 ## Baixar e instalar
 
@@ -14,6 +14,11 @@ Plugin com painel de acessibilidade para visitantes do site. **Versão 2.0.1**, 
 O botão **Code → Download ZIP** do GitHub baixa o projeto completo. Para instalar no WordPress, use o arquivo `botao-acessibilidade.zip` indicado acima.
 
 Requisitos: WordPress 5.8 ou mais novo e PHP 7.4 ou mais novo (os mesmos da 1.x). No WordPress 6.3+ o script sai com `defer`; antes disso, no rodapé sem `defer` (funciona igual).
+
+## O que mudou na 2.0.2
+
+- **O ajuste do celular agora vem do kit.** A regra da 2.0.1 entrou no kit PHP do SGW, que gera o `acessibilidade.js`: até 480 px de largura ou 500 px de altura o painel fica preso em cima e embaixo da área visível e rola por dentro (deitado, mais largo e em colunas). O kit também trocou a altura máxima de `100vh` por `100dvh` (descontando o notch), o que corrige tablets e celulares grandes acima de 480 px. Deitado, a largura passou a ser medida sem a barra de rolagem (`100%` em vez de `100vw`), para o painel não passar da borda num computador com janela baixa. Vale também no `demo.html` e no uso sem WordPress.
+- O CSS que o plugin imprimia no `<head>` (`ba11y_css_mobile()`) saiu: ficou dentro do `acessibilidade.js`.
 
 ## O que mudou na 2.0.1
 
@@ -73,7 +78,7 @@ Filtros para desenvolvedores: `botao_acessibilidade_nonce` (nonce da CSP, ver ab
 ## CSP (Content Security Policy)
 
 - O arquivo não usa `eval` nem `new Function`. Libere-o em `script-src` pela origem do site ou por `nonce`.
-- O painel injeta um `<style>`: com `nonce`, ele recebe o mesmo `nonce` do `<script>`; sem `nonce`, `style-src` precisa de `'unsafe-inline'`. O `<style>` do ajuste no celular, que o plugin imprime no `<head>`, segue a mesma regra.
+- O painel injeta um `<style>`: com `nonce`, ele recebe o mesmo `nonce` do `<script>`; sem `nonce`, `style-src` precisa de `'unsafe-inline'`.
 - Para o plugin pôr o `nonce` no `<script>`, devolva-o no filtro: `add_filter( 'botao_acessibilidade_nonce', function () { return MEU_NONCE; } );`. Se outro plugin de CSP já colocar `nonce` na tag, ele é mantido.
 - **Com Libras ligado**, libere também os domínios do VLibras (medido com VLibras 7.12.2; o serviço pode mudar de domínio):
 
@@ -125,8 +130,6 @@ Os atributos da 1.x (`data-lado`, `data-altura`, `data-tamanho` pequeno/médio/g
 ## De onde vem o JavaScript
 
 `acessibilidade.js` é **gerado** pelo kit PHP do SGW (`kits/site-php/gerado/acessibilidade.js`, pela ferramenta `kits/site-php/ferramentas/gerar-acessibilidade-js.php`) e copiado para cá **byte a byte**. **Não edite à mão**: mude o painel no kit, gere de novo lá e copie o arquivo. O `.gitattributes` deste repositório marca o arquivo como `-text`, para o Git no Windows não trocar os finais de linha e o arquivo continuar idêntico ao gerado.
-
-Ajustes do plugin que ainda não estão no kit ficam no PHP: hoje, o CSS do painel no celular (`ba11y_css_mobile()`). No `demo.html` e no uso sem WordPress esse ajuste não existe.
 
 ## Testar
 
